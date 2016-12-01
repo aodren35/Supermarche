@@ -9,19 +9,19 @@ public class Chariots {
 		stockChariot = Supermarche.NB_CHARIOTS;
 	}
 	
-	public synchronized void prendreChariot() throws InterruptedException{
+	public synchronized void prendreChariot(int idClient) throws InterruptedException{
 		//attente d'un chariot
 		while (stockChariot<=0){
-			System.out.println("Attente chariot, stock chariot : "+stockChariot);
+			System.out.println("Client " + idClient + " : Attente chariot par le Client, stock chariot : "+stockChariot);
 			wait();
 		}
-		System.out.println("Chariot pris, stock chariot : "+stockChariot);
+		System.out.println("Client " + idClient + " : Chariot pris, stock chariot : "+stockChariot);
 		stockChariot --;
 		
 	}
 	
-	public synchronized void rendreChariot(){
-		System.out.println("Chariot rendu, stock chariot : "+stockChariot);
+	public synchronized void rendreChariot(int idClient) throws InterruptedException{
+		System.out.println("Client " + idClient + " : Chariot rendu par le Client, stock chariot : "+stockChariot);
 		stockChariot ++;
 		//Reveil du client qui attendait son chariot
 		notifyAll();

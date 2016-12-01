@@ -27,19 +27,19 @@ public class Rayon {
 		this.stockArticle = stockActuel;
 	}
 	
-	public synchronized void prendreArticle() throws InterruptedException{
+	public synchronized void prendreArticle(int idClient) throws InterruptedException{
 		while (stockArticle<=0){
-			System.out.println("Attente produit, stock " + article + " : " +stockArticle);
+			System.out.println("Client " + idClient  + " : Attente produit, stock " + article + " : " +stockArticle);
 			wait();
 		}
-		System.out.println("Produit pris, stock " + article + " : "+stockArticle);
+		System.out.println("Client " + idClient  + " : Produit pris, stock " + article + " : "+stockArticle);
 		stockArticle --;
 	}
 	
 	public synchronized int remplirStock(int stockChef){
 		while(stockArticle<Supermarche.RAYON_STOCK_MAX && stockChef>=0){
 			
-			System.out.println("Stock incrémenté, stock " + article + " : " + stockArticle);
+			System.out.println("Stock incremente, stock " + article + " : " + stockArticle);
 			//Ajout d'un article en rayon
 			stockArticle ++;
 			//Décrémentation du stock du chef de rayon

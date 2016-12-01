@@ -9,25 +9,27 @@ public class Client extends Thread {
 
 	private Supermarche marche;
 	private HashMap<String, Integer> listeCourse;
+	private int idClient;
 
-	public Client(Supermarche marcheInit) {
+	public Client(Supermarche marcheInit, int idClient) {
 		listeCourse = new HashMap<String, Integer>();
+		this.idClient = idClient; 
 		// on rend alÃ©atoire le nombre d'articles dans la liste de course entre
 		// 0 et 20
 		int bound = 5;
 		Random r = new Random();
 		int randomNumber = r.nextInt(bound);
 		listeCourse.put("sucre", randomNumber);
-		System.out.println("Le client a besoin de " + randomNumber + " sucre");
+		System.out.println("Client " + idClient  + " : besoin de " + randomNumber + " sucre");
 		randomNumber = r.nextInt(bound);
 		listeCourse.put("beurre", randomNumber);
-		System.out.println("Le client a besoin de " + randomNumber + " beurre");
+		System.out.println("Client " + idClient + " : a besoin de " + randomNumber + " beurre");
 		randomNumber = r.nextInt(bound);
 		listeCourse.put("lait", randomNumber);
-		System.out.println("Le client a besoin de " + randomNumber + " lait");
+		System.out.println("Client " + idClient + " : a besoin de " + randomNumber + " lait");
 		randomNumber = r.nextInt(bound);
 		listeCourse.put("farine", randomNumber);
-		System.out.println("Le client a besoin de " + randomNumber + " farine \n");
+		System.out.println("Client " + idClient + " : a besoin de " + randomNumber + " farine \n");
 		marche = marcheInit;
 
 	}
@@ -35,7 +37,7 @@ public class Client extends Thread {
 	public void run() {
 		try {
 			// ArrivÃ© dans le supermarchÃ© -> prendre chariot
-			marche.getChariots().prendreChariot();
+			marche.getChariots().prendreChariot(idClient);
 
 			// simulation de courses
 			// Rayon sucre
@@ -43,7 +45,7 @@ public class Client extends Thread {
 			i = listeCourse.get("sucre");
 			if (i > 0) {
 				while (i > 0) {
-					marche.getRayon("sucre").prendreArticle();
+					marche.getRayon("sucre").prendreArticle(idClient);
 					i--;
 				}
 			}
@@ -53,7 +55,7 @@ public class Client extends Thread {
 			if (i > 0) {
 
 				while (i > 0) {
-					marche.getRayon("farine").prendreArticle();
+					marche.getRayon("farine").prendreArticle(idClient);
 					i--;
 				}
 			}
@@ -63,7 +65,7 @@ public class Client extends Thread {
 			if (i > 0) {
 
 				while (i > 0) {
-					marche.getRayon("beurre").prendreArticle();
+					marche.getRayon("beurre").prendreArticle(idClient);
 					i--;
 				}
 			}
@@ -73,13 +75,13 @@ public class Client extends Thread {
 			if (i > 0) {
 
 				while (i > 0) {
-					marche.getRayon("lait").prendreArticle();
+					marche.getRayon("lait").prendreArticle(idClient);
 					i--;
 				}
 			}
-			// TODO PASSER EN CAISSE
+			// TODO PASSER EN CAISSE : Il va chercher à avoir accès au tapis de la caisse -> accéder Tapis = True et il va déposer ses articles pour déposer sa liste de course (le tapis indique alors Client Suivant) et enfin payer
 
-			marche.getChariots().rendreChariot();
+			marche.getChariots().rendreChariot(idClient);
 		} catch (
 
 		InterruptedException e) {
