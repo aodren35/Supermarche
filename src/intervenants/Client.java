@@ -85,20 +85,20 @@ public class Client extends Thread {
 			// Le client dépose ses articles
 			for (String article : listeCourse.keySet()) {
 				int nombreArticle = listeCourse.get(article);
+				
 				// le client dépose ses articles
 				while (nombreArticle > 0) {
 					System.out.print("Client" + idClient + " ");
 					if (marche.getCaisse().getTapis().deposerArticle(article) == true) {
-
 						sleep(20);
 						nombreArticle--;
 					} else {
 						System.err.println("le Client " + idClient + " a été bloqué.");
 					}
 				}
-				System.out.print("Clientv" + idClient + " ");
-				marche.getCaisse().getTapis().deposerArticle("Client suivant");
 			}
+			System.out.print("Client" + idClient + " ");
+			marche.getCaisse().getTapis().deposerArticle("Client suivant");
 
 			marche.getCaisse().Payer(idClient);
 

@@ -23,7 +23,6 @@ public class Caisse{
 		}
 
 		System.err.println("Client " + idClient + " : Accède au tapis");
-		//sleep(5000);
 		tapisAccessible = false;
 		return true;
 	}
