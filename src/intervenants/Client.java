@@ -13,14 +13,14 @@ public class Client extends Thread {
 
 	public Client(Supermarche marcheInit, int idClient) {
 		listeCourse = new HashMap<String, Integer>();
-		this.idClient = idClient; 
+		this.idClient = idClient;
 		// on rend alÃ©atoire le nombre d'articles dans la liste de course entre
-		// 0 et 20
+		// 0 et 5
 		int bound = 5;
 		Random r = new Random();
 		int randomNumber = r.nextInt(bound);
 		listeCourse.put("sucre", randomNumber);
-		System.out.println("Client " + idClient  + " : besoin de " + randomNumber + " sucre");
+		System.out.println("Client " + idClient + " : besoin de " + randomNumber + " sucre");
 		randomNumber = r.nextInt(bound);
 		listeCourse.put("beurre", randomNumber);
 		System.out.println("Client " + idClient + " : a besoin de " + randomNumber + " beurre");
@@ -79,9 +79,33 @@ public class Client extends Thread {
 					i--;
 				}
 			}
-			// TODO PASSER EN CAISSE : Il va chercher à avoir accès au tapis de la caisse -> accéder Tapis = True et il va déposer ses articles pour déposer sa liste de course (le tapis indique alors Client Suivant) et enfin payer
+			// Le client accède au tapis de la caisse
+			marche.getCaisse().accederTapis(idClient);
 
+			// Le client dépose ses articles
+			for (String article : listeCourse.keySet()) {
+				int nombreArticle = listeCourse.get(article);
+				// le client dépose ses articles
+				while (nombreArticle > 0) {
+					System.out.print("Client" + idClient + " ");
+					if (marche.getCaisse().getTapis().deposerArticle(article) == true) {
+
+						sleep(20);
+						nombreArticle--;
+					} else {
+						System.err.println("le Client " + idClient + " a été bloqué.");
+					}
+				}
+				System.out.print("Clientv" + idClient + " ");
+				marche.getCaisse().getTapis().deposerArticle("Client suivant");
+			}
+
+			marche.getCaisse().Payer(idClient);
+
+			// Le client rend le chariot
 			marche.getChariots().rendreChariot(idClient);
+			
+			
 		} catch (
 
 		InterruptedException e) {

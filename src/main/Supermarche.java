@@ -9,8 +9,8 @@ public class Supermarche {
 
 	public static final int NB_CHARIOTS = 10;
 	public static final int NB_CLIENTS = 11;
-	public static final int RAYON_STOCK_MAX = 1;
-	public static final int RAYON_STOCK_INIT = 1;
+	public static final int RAYON_STOCK_MAX = 5;
+	public static final int RAYON_STOCK_INIT = 5;
 	private Chariots chariots;
 	private HashMap<Integer,Client>clients;
 	private HashMap<String,Rayon> rayons;
@@ -55,6 +55,10 @@ public class Supermarche {
 		return caisse;
 	}
 	
+	public Caissier getCaissier(){
+		return caissier;
+	}
+	
 	
 	public static void main(String[] args) {
 				
@@ -70,7 +74,10 @@ public class Supermarche {
 		superMarche.addRayon(lait);
 		superMarche.addRayon(beurre);
 
-		superMarche.getCaisse().start();
+		superMarche.getChef().setDaemon(true);
+		superMarche.getCaissier().setDaemon(true);
+		
+		superMarche.getCaissier().start();
 		int i ;
 		for(i = 1;i<=NB_CLIENTS;i++){
 			Client nouveauClient = new Client(superMarche,i);
@@ -81,7 +88,6 @@ public class Supermarche {
 		}
 		superMarche.getChef().start();
 		
-
 	}
 
 }

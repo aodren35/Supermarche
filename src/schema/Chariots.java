@@ -21,8 +21,8 @@ public class Chariots {
 	}
 	
 	public synchronized void rendreChariot(int idClient) throws InterruptedException{
-		System.out.println("Client " + idClient + " : Chariot rendu par le Client, stock chariot : "+stockChariot);
 		stockChariot ++;
+		System.out.println("Client " + idClient + " : Chariot rendu par le Client, stock chariot : "+stockChariot);
 		//Reveil du client qui attendait son chariot
 		notifyAll();
 	}
