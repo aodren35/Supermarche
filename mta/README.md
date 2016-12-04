@@ -1,7 +1,7 @@
 #Instructions pour build le projet
 
 Deziper dans dossier personnels
-Import Existing Maven Project dans l'IDE
+Import Existing Maven Project dans l'IDE avec le fichier pom.xml
 
 
 #Instructions pour l'execution du projet
