@@ -1,3 +1,9 @@
+#Instructions pour build le projet
+
+Deziper dans dossier personnels
+Import Existing Maven Project dans l'IDE
+
+
 #Instructions pour l'execution du projet
 
 Pour tester la partie A executer le main de la classe Supermarche.java
