@@ -79,6 +79,12 @@ public class Caisse {
 			//Et en attente du caissier
 			notifyAll();
 		}
+		//Si le caissier a récupéré un produit (vidé une partie du tapis et fait avancé)
+		
+		else if (etatTapis.equals("article next") && !this.tapisAccessible){
+			//On réveille le thread client attendant pour deposer ses produit
+			notifyAll();
+		}
 
 	}
 

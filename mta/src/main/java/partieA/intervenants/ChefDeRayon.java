@@ -39,7 +39,7 @@ public class ChefDeRayon extends Thread {
 
 	public void run() {
 		try {
-			//Le caissier parcours le supermarche non stop
+			//Le chef de rayon parcours le supermarche non stop
 			while (true) {
 				// debut journée dans l'entrepot
 				// remplis son stock
