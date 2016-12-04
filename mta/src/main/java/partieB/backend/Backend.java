@@ -1,14 +1,8 @@
-package org.inria.restlet.mta.backend;
+package partieB.backend;
 
-import org.inria.restlet.mta.database.api.Database;
-import org.inria.restlet.mta.database.api.impl.InMemoryDatabase;
 
 /**
- *
- * Backend for all resources.
- * 
- * @author ctedeschi
- * @author msimonin
+ * @author Aodren Letellier - Jordan Monfort
  *
  */
 public class Backend

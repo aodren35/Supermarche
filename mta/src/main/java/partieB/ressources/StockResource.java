@@ -1,4 +1,4 @@
-package org.inria.restlet.mta.resources;
+package partieB.ressources;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.inria.restlet.mta.backend.Backend;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -15,9 +14,15 @@ import org.restlet.representation.Representation;
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 
-import main.Supermarche;
+import partieA.schema.Supermarche;
+import partieB.backend.Backend;
 
-
+/**
+ * 
+ * Ressource pour /supermarche/stock/
+ * @author Aodren Letellier - Jordan Monfort
+ *
+ */
 public class StockResource extends ServerResource {
 	/** Backend. */
 	private Backend backend_;
@@ -38,27 +43,26 @@ public class StockResource extends ServerResource {
 	 */
 	@Get("json")
 	public Representation getStock() throws Exception {
-		
+
 		Collection<JSONObject> stocks = new ArrayList<JSONObject>();
-		//remplir le stock
-		HashMap<String,Integer>stock=((Supermarche) getApplication()).getStock();
-		Set<String>keyset = stock.keySet();
-		Iterator<String>it = keyset.iterator();
-		while(it.hasNext()){
+		// remplir le stock
+		HashMap<String, Integer> stock = ((Supermarche) getApplication()).getStock();
+		Set<String> keyset = stock.keySet();
+		Iterator<String> it = keyset.iterator();
+		while (it.hasNext()) {
 			String key = it.next();
 			int value = stock.get(key);
-			System.out.println("STOCK : "+key+ " "+value);
+			System.out.println("STOCK : " + key + " " + value);
 			JSONObject stockObject = new JSONObject();
 			stockObject.put(key, value);
 			stocks.add(stockObject);
 		}
-		
-        JSONArray jsonArray = new JSONArray(stocks);
-        JsonRepresentation result = new JsonRepresentation(jsonArray);
-        result.setIndenting(true);
-        return result;
-		
-		
+
+		JSONArray jsonArray = new JSONArray(stocks);
+		JsonRepresentation result = new JsonRepresentation(jsonArray);
+		result.setIndenting(true);
+		return result;
+
 	}
 
 }

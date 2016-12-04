@@ -1,8 +1,14 @@
-package intervenants;
+package partieA.intervenants;
 
-import main.Supermarche;
+import partieA.schema.Supermarche;
 
+/**
+ * La classe Caissier représente le caissier sous forme de thread
+ * @author Aodren Letellier / Jordan Monfort
+ *
+ */
 public class Caissier extends Thread {
+	
 	private Supermarche supermarche;
 	private boolean disponibilite;
 
@@ -11,6 +17,9 @@ public class Caissier extends Thread {
 		this.supermarche = superMarche;
 	}
 
+	/**
+	 * @return retourne la disponibilité du caissier pour encaisser
+	 */
 	public boolean getDisponibilite() {
 		return this.disponibilite;
 	}
@@ -19,17 +28,16 @@ public class Caissier extends Thread {
 		this.disponibilite = dispo;
 	}
 
+	
 	public void run() {
 		while (true) {
 			try {
+				//Le caissier reste à sa caisse tout le temps et gère le tapis
 				supermarche.getCaisse().parcourirTapis();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
-		// TODO client suivant
-		// TODO Recupérer les articles et qd il aura récup tous les articles du
-		// client il va être disponible pour payer.
-		// Try Catch
+
 	}
 }
